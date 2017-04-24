@@ -9,15 +9,28 @@
   </head>
   <body>
     <div class="container">
-      <div class="form-group">
-        <label for="condition">Search by condition</label>
-        <input id="condition" type="text">
-        <button id="searchDoctorsByCondition" class="btn btn-primary">Search!</button>
+      <div class="form">
+        <div class="form-group">
+          <label for="location">Location:</label>
+          <input id="location" type="text">
+        </div>
+        <div class="form-group">
+          <label for="condition">Condition:</label>
+          <input id="condition" type="text">
+        </div>
+        <div class="form-group">
+          <label for="insuror">Insurance Plan:</label>
+          <input id="insuror" type="text">
+        </div>
+        <button id="genreSearch" class="btn btn-primary">Search!</button>
       </div>
       <div class="row">
-        <ul class="showDoctors">
+        <ul id="showDoctors">
         </ul>
       </div>
+      <div id="modals">
+      </div>
+      <p>Powered by <a href="https://betterdoctor.com/">BetterDoctor</a></p>
     </div>
   </body>
 </html>
