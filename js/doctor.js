@@ -4,7 +4,7 @@ Doctor = function(){
 };
 
 var conditionsList = [];
-var insurorsList = [];
+var insurancesList = [];
 
 Doctor.prototype.getAllConditions = function (buildConditionsList) {
   $.get('https://api.betterdoctor.com/2016-03-01/conditions?fields=name%2Cuid&user_key=' + apiKey)
@@ -23,26 +23,43 @@ Doctor.prototype.getAllConditions = function (buildConditionsList) {
   });
 };
 
-Doctor.prototype.getAllInsurors = function (buildInsurorsList) {
+Doctor.prototype.getAllInsurances = function (buildInsurancesList) {
   $.get('https://api.betterdoctor.com/2016-03-01/insurances?user_key=' + apiKey)
   .then(function(response) {
-    insurorsList = [];
+    insurancesList = [];
     // console.log(response.data);
-    response.data.forEach(function(insuror) {
-      insuror.plans.forEach(function(plan) {
-        insurorsList.push(insuror.name + ' - ' + plan.name);
+    response.data.forEach(function(insurance) {
+      insurance.plans.forEach(function(plan) {
+        insurancesList.push({value: plan.uid, label: (insurance.name + ' - ' + plan.name)});
       });
     });
-    buildInsurorsList(insurorsList);
+    console.log(insurancesList);
+    buildInsurancesList(insurancesList);
   })
   .fail(function(error) {
     console.log("didn't work");
   });
 };
 
-Doctor.prototype.getDoctorsByCondition = function (condition, showDoctors) {
-  $.get('https://api.betterdoctor.com/2016-03-01/doctors?query=' + condition  + '&user_key=' + apiKey)
+Doctor.prototype.getDoctors = function (location, condition, insurance, showDoctors) {
+  var url = 'https://api.betterdoctor.com/2016-03-01/doctors';
+  if (location || condition || insurance) {
+    url = url.concat('?');
+    if (location) {
+      url = url.concat('&location=' + location + ',10');
+    }
+    if (condition) {
+      url = url.concat('&query=' + condition);
+    }
+    if (insurance) {
+      url = url.concat('&insurance_uid=' + insurance);
+    }
+  }
+  url = url.concat('&user_key=' + apiKey);
+  console.log(url);
+  $.get(url)
   .then(function(response) {
+    console.log(response);
     showDoctors(response.data);
   })
   .fail(function(error) {
