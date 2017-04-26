@@ -5,7 +5,6 @@ Location.prototype.getLocation = function(showLocation) {
   .then(function(response) {
     var location = response.lat + "," + response.lon;
     showLocation(location);
-    console.log(response);
   })
   .fail(function(error) {
     console.log("failed to acquire location");

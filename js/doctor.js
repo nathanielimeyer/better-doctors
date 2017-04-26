@@ -46,7 +46,7 @@ Doctor.prototype.getDoctors = function (location, condition, insurance, showDoct
   if (location || condition || insurance) {
     url = url.concat('?');
     if (location) {
-      url = url.concat('&location=' + location + ',10');
+      url = url.concat('&location=' + location);
     }
     if (condition) {
       url = url.concat('&query=' + condition);

@@ -15,17 +15,20 @@
           <input id="location" type="text">
         </div>
         <div class="form-group">
+          <label for="radius">Radius (in miles):</label>
+          <input type="number" id="radius" value="10">
+        </div>
+        <div class="form-group">
           <label for="condition">Condition:</label>
           <input id="condition" type="text">
         </div>
-        <!-- <div class="form-group">
-          <label for="insurance">Insurance Plan:</label>
-          <input id="insurance" type="text">
-        </div> -->
-        <div class="ui-widget">
-          <select id="insurance">
-            <option value="">Select one...</option>
-          </select>
+        <div class="form-group">
+          <div class="ui-widget">
+            <label for="insurance">Insurance:</label>
+            <select id="insurance">
+              <option value="">Select one...</option>
+            </select>
+          </div>
         </div>
         <button id="doctorSearch" class="btn btn-primary">Search!</button>
       </div>
